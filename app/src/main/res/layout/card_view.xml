@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="15dp"
+    android:layout_marginHorizontal="15dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageCardView"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:contentDescription="@string/todo"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/titleCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/back"
+                android:textSize="25sp"
+                android:theme="@style/Theme.XVISS" />
+
+
+            <TextView
+                android:id="@+id/locationView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleCardView"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:theme="@style/Theme.XVISS" />
+
+            <TextView
+                android:id="@+id/descriptionCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/locationView"
+                android:padding="10dp"
+                android:textColor="@color/back"
+                android:textSize="15sp"
+                android:theme="@style/Theme.XVISS" />
+
+            <ImageView
+                android:id="@+id/InfoIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageCardView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_baseline_info_24" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
