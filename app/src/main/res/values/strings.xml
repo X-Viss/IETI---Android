@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">XVISS</string>
+    <string name="title_test"> Bienvenido </string>
+    <string name="banner_image">BannerImage</string>
+    <string name="login_text">Login</string>
+    <string name="todo">generic description</string>
+    <string name="element_text">Lorem</string>
+    <string name="title_main_inspire">Inspirate</string>
+    <string name="title_main_trip">Tipos de viaje</string>
 </resources>
