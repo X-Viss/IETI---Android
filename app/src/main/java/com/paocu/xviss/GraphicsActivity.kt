@@ -97,7 +97,7 @@ class GraphicsActivity : AppCompatActivity() {
         // Request a object response from the provided URL.
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
-            "https://raw.githubusercontent.com/Arep-Nico/template/master/date_test",
+            "https://raw.githubusercontent.com/PaoCuellar/data_test/main/data_stat",
             null,
             { response ->
                 function(response)

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         LoginButton.setOnClickListener {
             Toast.makeText(
                 this,
-                "Login Click",
+                "Lo más popular",
                 Toast.LENGTH_LONG
             ).show()
             startActivity(Intent(this, GraphicsActivity::class.java))
