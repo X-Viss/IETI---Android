@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blueback">#2C355E</color>
     <color name="back">#071659</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

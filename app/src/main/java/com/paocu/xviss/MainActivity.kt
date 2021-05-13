@@ -1,5 +1,6 @@
 package com.paocu.xviss
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -37,6 +38,15 @@ class MainActivity : AppCompatActivity() {
         // Get the widgets reference
         Glide.with(applicationContext).load("https://picsum.photos/1280/720?random=100")
             .into(imageView)
+
+        LoginButton.setOnClickListener {
+            Toast.makeText(
+                this,
+                "Lo más popular",
+                Toast.LENGTH_LONG
+            ).show()
+            startActivity(Intent(this, GraphicsActivity::class.java))
+        }
     }
 
     private fun activityLoad(response: JSONArray) {

@@ -2,9 +2,10 @@
     <string name="app_name">XVISS</string>
     <string name="title_test"> Bienvenido </string>
     <string name="banner_image">BannerImage</string>
-    <string name="login_text">Login</string>
+    <string name="login_text">Lo más popular</string>
     <string name="todo">generic description</string>
     <string name="element_text">Lorem</string>
     <string name="title_main_inspire">Inspirate</string>
     <string name="title_main_trip">Tipos de viaje</string>
+    <string name="title_stat_trip">Lo más popular</string>
 </resources>
