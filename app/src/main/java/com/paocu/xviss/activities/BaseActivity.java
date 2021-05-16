@@ -18,17 +18,24 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.paocu.xviss.MainActivity;
 import com.paocu.xviss.R;
 import com.paocu.xviss.TravelListActivity;
 
+/**
+ * this activity shows all user travels
+ */
 public class BaseActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("CREATING");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -66,6 +73,8 @@ public class BaseActivity extends AppCompatActivity {
             return true;
         }
         );
+
+        recyclerView = findViewById(R.id.travelistrecyclerView);
     }
 
     @Override
