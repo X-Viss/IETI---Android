@@ -32,6 +32,8 @@ import com.paocu.xviss.network.requests.TravelService;
 import com.paocu.xviss.services.TravelLiveService;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -126,34 +128,41 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-    private void loadTravels(){
+    private void loadTravels() {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+                List<Travel> widgetContent = new ArrayList<Travel>();
                 try {
                     Response<List<Travel>> response =
                             travelService.getTravels("david.vasquez@mail.escuelaing.edu.co").execute();
-                    System.out.println(response.code());
-                    System.out.println(response.body().size());
+
                     if(response.isSuccessful()){
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                TravelItemAdapter travelItemAdapter = new TravelItemAdapter(response.body(), getApplicationContext());
-                                recyclerView.setAdapter(travelItemAdapter);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-                                RecyclerView.ItemDecoration itemDecoration = new
-                                        DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
-                                recyclerView.addItemDecoration(itemDecoration);
-                            }
-                        });
-
+                        widgetContent.addAll(response.body());
+                        travelLiveService.saveAll(widgetContent);
+                    } else {
+                        widgetContent.addAll(travelLiveService.getAll());
                     }
+
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
+                    widgetContent.addAll(travelLiveService.getAll());
                 }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TravelItemAdapter travelItemAdapter = new TravelItemAdapter(widgetContent, getApplicationContext());
+                        recyclerView.setAdapter(travelItemAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                        RecyclerView.ItemDecoration itemDecoration = new
+                                DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
+                        recyclerView.addItemDecoration(itemDecoration);
+                    }
+                });
             }
         });
     }
