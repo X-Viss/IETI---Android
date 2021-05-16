@@ -1,15 +1,28 @@
 package com.paocu.xviss.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.paocu.xviss.model.util.DateConverter;
+
 import java.util.Date;
 
-
+@Entity
+@TypeConverters(DateConverter.class)
 public class Travel {
 
     private String id;
     private String user;
 
     private String destiny;
+
+
+    @PrimaryKey
+    @NonNull
     private String travelId;
+
     private String title;
     private String description;
     private Date dueDate;
@@ -71,5 +84,11 @@ public class Travel {
 
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.format("{ title: %s , date: %s, description: %s}", title, dueDate == null ? "NULL": dueDate.toString(), description);
     }
 }

@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"><![CDATA[>
-
-
-
-    ]]>
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,6 +20,9 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="24dp"
             android:background="@drawable/ic_baseline_delete_forever_24"
+            android:clickable="true"
+            android:focusable="true"
+            android:stateListAnimator="@anim/fragment_fade_enter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
