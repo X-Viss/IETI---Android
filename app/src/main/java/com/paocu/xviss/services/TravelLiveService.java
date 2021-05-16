@@ -37,4 +37,9 @@ public class TravelLiveService {
         return travels;
     }
 
+
+    public void deleteTravel(String travelId){
+
+    }
+
 }
