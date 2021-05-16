@@ -1,6 +1,8 @@
 package com.paocu.xviss.activities.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ public class TravelItemAdapter extends RecyclerView.Adapter<TravelItemAdapter.Vi
 
     private List<Travel> travelList;
     private Context context;
+    private ListItemsListener listItemsListener;
 
     public TravelItemAdapter(List<Travel> travelList, Context context){
         this.travelList = travelList;
@@ -48,12 +51,16 @@ public class TravelItemAdapter extends RecyclerView.Adapter<TravelItemAdapter.Vi
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(travel);
+                System.out.println(position);
+                listItemsListener.onClickDelete(position);
             }
         });
 
 
     }
+
+
+
 
     @Override
     public int getItemCount() {
@@ -92,5 +99,11 @@ public class TravelItemAdapter extends RecyclerView.Adapter<TravelItemAdapter.Vi
         }
     }
 
+    public ListItemsListener getListItemsListener() {
+        return listItemsListener;
+    }
 
+    public void setListItemsListener(ListItemsListener listItemsListener) {
+        this.listItemsListener = listItemsListener;
+    }
 }

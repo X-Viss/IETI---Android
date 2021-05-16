@@ -1,5 +1,7 @@
 package com.paocu.xviss.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,7 +12,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -25,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.paocu.xviss.MainActivity;
 import com.paocu.xviss.R;
 import com.paocu.xviss.TravelListActivity;
+import com.paocu.xviss.activities.adapter.ListItemsListener;
 import com.paocu.xviss.activities.adapter.TravelItemAdapter;
 import com.paocu.xviss.model.Travel;
 import com.paocu.xviss.network.RetrofitNetwork;
@@ -32,7 +34,6 @@ import com.paocu.xviss.network.requests.TravelService;
 import com.paocu.xviss.services.TravelLiveService;
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -43,14 +44,17 @@ import retrofit2.Response;
 /**
  * this activity shows all user travels
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements ListItemsListener {
 
     private AppBarConfiguration mAppBarConfiguration;
 
     private RecyclerView recyclerView;
+    private TravelItemAdapter travelItemAdapter;
 
     private TravelLiveService travelLiveService;
     private TravelService travelService;
+    private List<Travel> allTravels;
+    private ListItemsListener listener = this;
 
     private final ExecutorService executorService = Executors.newFixedThreadPool( 1 );
 
@@ -66,8 +70,7 @@ public class BaseActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //TODO REDIRECT TO CREATE TRAVEL VIEW
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -98,6 +101,7 @@ public class BaseActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.travelistrecyclerView);
         setUpServices();
         loadTravels();
+
     }
 
     @Override
@@ -122,13 +126,14 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setUpServices(){
         travelLiveService = new TravelLiveService(getApplicationContext());
-        //ADD TOKEN LOGIN
+        //TODO ADD TOKEN LOGIN
         RetrofitNetwork retrofitNetwork = new RetrofitNetwork("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZpZC52YXNxdWV6QG1haWwuZXNjdWVsYWluZy5lZHUuY28iLCJleHAiOjE2MjEyMTU4NzIsImlhdCI6MTYyMTE3OTg3Mn0.GTxZBUZSJrTOit67efq1hJpLhVbCoyu_y6HsapiyPqw");
         travelService = (TravelService) retrofitNetwork.getRetrofitService(TravelService.class);
     }
 
 
     private void loadTravels() {
+
         executorService.execute(new Runnable() {
             @Override
             public void run() {
@@ -143,9 +148,6 @@ public class BaseActivity extends AppCompatActivity {
                     } else {
                         widgetContent.addAll(travelLiveService.getAll());
                     }
-
-
-
                 } catch (IOException e) {
                     e.printStackTrace();
                     widgetContent.addAll(travelLiveService.getAll());
@@ -154,7 +156,9 @@ public class BaseActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        TravelItemAdapter travelItemAdapter = new TravelItemAdapter(widgetContent, getApplicationContext());
+                        allTravels = widgetContent;
+                        travelItemAdapter = new TravelItemAdapter(allTravels, getApplicationContext());
+                        travelItemAdapter.setListItemsListener(listener);
                         recyclerView.setAdapter(travelItemAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
@@ -163,6 +167,62 @@ public class BaseActivity extends AppCompatActivity {
                         recyclerView.addItemDecoration(itemDecoration);
                     }
                 });
+            }
+        });
+    }
+
+    @Override
+    public void onClickDelete(int position) {
+        deleleConfirmationHandler(position);
+    }
+
+
+    private void deleleConfirmationHandler(int position){
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
+        dialogo.setTitle("Confirmación");
+        dialogo.setMessage("¿ Estás seguro de que quieres borrar tu viaje ?");
+        dialogo.setCancelable(true);
+        dialogo.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo, int id) {
+                deleteTravel(position);
+            }
+        });
+        dialogo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo, int id) {
+
+            }
+        });
+        dialogo.show();
+    }
+
+    public void deleteTravel(int position){
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                Travel travel = allTravels.get(position);
+                try {
+                    View view = findViewById(R.id.drawer_layout);
+                    Snackbar.make(view,  "Borrando", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    Response<Void> response =
+                            travelService.deleteTravel(travel.getTravelId()).execute();
+                    if(response.isSuccessful()){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                allTravels.remove(position);
+                                travelItemAdapter.notifyDataSetChanged();
+                                travelItemAdapter.notifyItemRemoved(position);
+                                travelItemAdapter.notifyItemRangeChanged(position, allTravels.size());
+                                View view = findViewById(R.id.drawer_layout);
+                                Snackbar.make(view,  "Viaje borrado", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            }
+                        });
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
