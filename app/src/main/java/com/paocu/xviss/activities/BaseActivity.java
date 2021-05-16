@@ -18,17 +18,45 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.paocu.xviss.MainActivity;
 import com.paocu.xviss.R;
 import com.paocu.xviss.TravelListActivity;
+import com.paocu.xviss.activities.adapter.TravelItemAdapter;
+import com.paocu.xviss.model.Travel;
+import com.paocu.xviss.network.RetrofitNetwork;
+import com.paocu.xviss.network.requests.TravelService;
+import com.paocu.xviss.services.TravelLiveService;
 
+import java.io.IOException;
+import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import retrofit2.Response;
+
+/**
+ * this activity shows all user travels
+ */
 public class BaseActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    private RecyclerView recyclerView;
+
+    private TravelLiveService travelLiveService;
+    private TravelService travelService;
+
+    private final ExecutorService executorService = Executors.newFixedThreadPool( 1 );
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("CREATING");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -66,6 +94,10 @@ public class BaseActivity extends AppCompatActivity {
             return true;
         }
         );
+
+        recyclerView = findViewById(R.id.travelistrecyclerView);
+        setUpServices();
+        loadTravels();
     }
 
     @Override
@@ -86,5 +118,52 @@ public class BaseActivity extends AppCompatActivity {
     public void openTravelList(MenuItem item){
         Intent intent = new Intent(this, TravelListActivity.class);
         startActivity(intent);
+    }
+
+    public void setUpServices(){
+        travelLiveService = new TravelLiveService(getApplicationContext());
+        //ADD TOKEN LOGIN
+        RetrofitNetwork retrofitNetwork = new RetrofitNetwork("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZpZC52YXNxdWV6QG1haWwuZXNjdWVsYWluZy5lZHUuY28iLCJleHAiOjE2MjEyMTU4NzIsImlhdCI6MTYyMTE3OTg3Mn0.GTxZBUZSJrTOit67efq1hJpLhVbCoyu_y6HsapiyPqw");
+        travelService = (TravelService) retrofitNetwork.getRetrofitService(TravelService.class);
+    }
+
+
+    private void loadTravels() {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                List<Travel> widgetContent = new ArrayList<Travel>();
+                try {
+                    Response<List<Travel>> response =
+                            travelService.getTravels("david.vasquez@mail.escuelaing.edu.co").execute();
+
+                    if(response.isSuccessful()){
+                        widgetContent.addAll(response.body());
+                        travelLiveService.saveAll(widgetContent);
+                    } else {
+                        widgetContent.addAll(travelLiveService.getAll());
+                    }
+
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    widgetContent.addAll(travelLiveService.getAll());
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TravelItemAdapter travelItemAdapter = new TravelItemAdapter(widgetContent, getApplicationContext());
+                        recyclerView.setAdapter(travelItemAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                        RecyclerView.ItemDecoration itemDecoration = new
+                                DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
+                        recyclerView.addItemDecoration(itemDecoration);
+                    }
+                });
+            }
+        });
     }
 }
