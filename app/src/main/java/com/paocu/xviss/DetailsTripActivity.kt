@@ -81,11 +81,12 @@ class DetailsTripActivity : AppCompatActivity() {
         queue.add(jsonObjectRequest)
     }
 
-    private fun switchActivities(title: String, image: String, description: String) {
-        val intent = Intent(this, DetailsTripActivity::class.java).apply {
+    private fun switchActivities(title: String, image: String, description: String, location:String, activity:Class<*>) {
+        val intent = Intent(this, activity).apply {
             putExtra(VIEW_TITLE, title)
             putExtra(IMG_VIEW, image)
             putExtra(VIEW_DESCRIPTION, description)
+            putExtra(VIEW_LOCATION,location)
         }
         // start your next activity
         startActivity(intent)

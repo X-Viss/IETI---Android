@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.paocu.xviss.DetailsTypeActivity
 import com.paocu.xviss.R
 
 
@@ -37,6 +38,7 @@ class ActivitiesAdapter(private val dataSet: ArrayList<Activity>) :
                     "You click on Activity ${data.title}",
                     Toast.LENGTH_LONG
                 ).show()
+                data.clickFunction(data.title, data.image, data.description, data.location, DetailsTypeActivity::class.java)
             }
         }
     }
