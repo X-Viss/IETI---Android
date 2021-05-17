@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.XVISS">
+        <activity android:name=".DetailsTypeActivity"></activity>
         <activity android:name=".DetailsTripActivity"></activity>
         <activity android:name=".TravelListActivity"></activity>
         <activity
