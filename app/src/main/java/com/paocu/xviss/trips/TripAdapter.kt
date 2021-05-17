@@ -36,6 +36,7 @@ class TripAdapter(private val dataSet: ArrayList<TripType>) :
                     "You click on Trip ${data.title}",
                     Toast.LENGTH_LONG
                 ).show()
+                data.clickFunction(data.title, data.image, data.description)
             }
         }
     }
