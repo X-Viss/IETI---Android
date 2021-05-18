@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CreateTravelActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="262dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="30dp"
+                android:text="Selecciona tu rol!"
+                android:textColor="@color/blue_light"
+                android:textSize="30dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="10dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textView1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/mascota"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/mascotas"
+                        android:buttonTint="#FFFFFF"
+                        android:text="Mascota"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"
+                        tools:ignore="MissingConstraints" />
+
+                    <CheckBox
+                        android:id="@+id/mochilero"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/mochilero"
+                        android:buttonTint="#FFFFFF"
+                        android:text="Mochilero"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"
+                        tools:ignore="MissingConstraints" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView1">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <CheckBox
+                        android:id="@+id/pareja"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/parejas"
+                        android:text="Pareja"
+                        android:buttonTint="#FFFFFF"
+                        android:textSize="25dp"
+                        android:textColor="@color/white"
+                        tools:ignore="MissingConstraints" />
+                    <CheckBox
+                        android:id="@+id/turista"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/turistas"
+                        android:buttonTint="#FFFFFF"
+                        android:text="Turista"
+                        android:textSize="25dp"
+                        android:textColor="@color/white"
+                        tools:ignore="MissingConstraints" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="145dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <CheckBox
+                        android:id="@+id/trabajo"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/viajedenegocios"
+                        android:buttonTint="#FFFFFF"
+                        android:text="Trabajo"
+                        android:textSize="25dp"
+                        android:textColor="@color/white"
+                        tools:ignore="MissingConstraints" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/guardar_rol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#91C2EA"
+                android:onClick="rolSelectionClic"
+                android:text="Guardar"
+                app:layout_constraintTop_toBottomOf="@+id/trabajo" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="262dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="30dp"
+                android:text="Escoge tu destino!"
+                android:textColor="@color/blue_light"
+                android:textSize="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/guardar_rol"/>
+
+            <Spinner
+                android:id="@+id/countryList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                tools:layout_editor_absoluteX="6dp" />
+
+            <Button
+                android:id="@+id/guardar_pais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#91C2EA"
+                android:onClick="countrySelectionClic"
+                android:text="Guardar"
+                app:layout_constraintTop_toBottomOf="@+id/countryList" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

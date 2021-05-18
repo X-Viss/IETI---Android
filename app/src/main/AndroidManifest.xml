@@ -31,6 +31,8 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.BaseActivity" /></activity>
+        <activity android:name=".CreateTravelActivity"
+            android:parentActivityName=".activities.BaseActivity" />
         <activity android:name=".DetailsTypeActivity"></activity>
         <activity android:name=".DetailsTripActivity"></activity>
         <activity android:name=".TravelListActivity"></activity>

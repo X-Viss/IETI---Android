@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.paocu.xviss.CreateTravelActivity;
 import com.paocu.xviss.MainActivity;
 import com.paocu.xviss.R;
 import com.paocu.xviss.TravelListActivity;
@@ -95,6 +96,9 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
             int id = item.getItemId();
             if(id == R.id.nav_home){
                 Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }else if(id == R.id.nav_add){
+                Intent intent = new Intent(this, CreateTravelActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_log_out){
                 onClickLogout();
