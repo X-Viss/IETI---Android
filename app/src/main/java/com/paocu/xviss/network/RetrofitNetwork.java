@@ -1,5 +1,7 @@
 package com.paocu.xviss.network;
 
+import com.paocu.xviss.network.requests.CreateTravelServicce;
+
 import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -15,8 +17,8 @@ public class RetrofitNetwork
 {
 
     private Retrofit retrofit;
-
-    private String BASE_URL = "http://192.168.0.3:8080";
+    private String BASE_URL = "http://192.168.20.21:8080";
+    //private String BASE_URL = "http://192.168.0.3:8080";
 
 
     public RetrofitNetwork()
@@ -52,7 +54,5 @@ public class RetrofitNetwork
     public Object getRetrofitService(Class serviceClass){
         return retrofit.create(serviceClass);
     }
-
-
 
 }

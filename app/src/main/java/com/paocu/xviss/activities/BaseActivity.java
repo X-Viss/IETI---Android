@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.paocu.xviss.CreateTravelActivity;
 import com.paocu.xviss.MainActivity;
 import com.paocu.xviss.R;
 import com.paocu.xviss.TravelListActivity;
@@ -92,6 +93,9 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
             if(id == R.id.nav_home){
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
+            }else if(id == R.id.nav_add){
+                Intent intent = new Intent(this, CreateTravelActivity.class);
+                startActivity(intent);
             }
             System.out.println(item.getItemId());
             return true;
@@ -127,7 +131,7 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
     public void setUpServices(){
         travelLiveService = new TravelLiveService(getApplicationContext());
         //TODO ADD TOKEN LOGIN
-        RetrofitNetwork retrofitNetwork = new RetrofitNetwork("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZpZC52YXNxdWV6QG1haWwuZXNjdWVsYWluZy5lZHUuY28iLCJleHAiOjE2MjEyMTU4NzIsImlhdCI6MTYyMTE3OTg3Mn0.GTxZBUZSJrTOit67efq1hJpLhVbCoyu_y6HsapiyPqw");
+        RetrofitNetwork retrofitNetwork = new RetrofitNetwork("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuQG1haWwuY29tIiwiZXhwIjoxNjIxMzkzOTkzLCJpYXQiOjE2MjEzNTc5OTN9.uuBiB91MKdtfhWXoC3KVbeSzjsmjqDCqqQdOJBH7sTI");
         travelService = (TravelService) retrofitNetwork.getRetrofitService(TravelService.class);
     }
 

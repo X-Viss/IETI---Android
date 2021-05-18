@@ -8,6 +8,7 @@ import androidx.room.TypeConverters;
 import com.paocu.xviss.model.util.DateConverter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @TypeConverters(DateConverter.class)
@@ -15,9 +16,7 @@ public class Travel {
 
     private String id;
     private String user;
-
     private String destiny;
-
 
     @PrimaryKey
     @NonNull
