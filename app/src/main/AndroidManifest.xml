@@ -13,10 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.XVISS">
-        <activity android:name=".TravelListActivity"></activity>
+
         <activity
-            android:name=".activities.BaseActivity"
-            android:label="@string/title_activity_base"
+            android:name=".activities.ui.login.LaunchActivity"
+            android:label="@string/app_name"
             android:theme="@style/Theme.XVISS.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,13 +27,19 @@
         <activity android:name=".GraphicsActivity" />
         <activity android:name=".MainActivity"
             android:parentActivityName=".activities.BaseActivity" >
-
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.BaseActivity" /></activity>
         <activity android:name=".CreateTravelActivity"
-            android:parentActivityName=".activities.BaseActivity" >
+            android:parentActivityName=".activities.BaseActivity" />
+        <activity android:name=".DetailsTypeActivity"></activity>
+        <activity android:name=".DetailsTripActivity"></activity>
+        <activity android:name=".TravelListActivity"></activity>
+        <activity android:name=".activities.ui.login.LoginActivity"></activity>
+        <activity android:name=".activities.BaseActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.XVISS.NoActionBar">
         </activity>
     </application>
 

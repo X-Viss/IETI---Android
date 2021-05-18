@@ -13,73 +13,31 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
-import com.paocu.xviss.activities.ActivitiesAdapter
-import com.paocu.xviss.activities.Activity
 import com.paocu.xviss.trips.TripAdapter
 import com.paocu.xviss.trips.TripType
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_details_trip.*
 import org.json.JSONArray
 
-const val VIEW_TITLE = "title"
-const val IMG_VIEW = "image"
-const val VIEW_DESCRIPTION = "description"
-const val VIEW_LOCATION = "location"
+class DetailsTripActivity : AppCompatActivity() {
 
-class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_details_trip)
 
-        // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this)
 
-        val urlActivity =
-            "https://raw.githubusercontent.com/PaoCuellar/data_test/main/data_activity"
-        getRequest(::activityLoad, urlActivity, queue)
+        // Get the Intent that started this activity and extract the string
+        tripTitle.text = intent.getStringExtra(VIEW_TITLE)
+        tripDescription.text = intent.getStringExtra(VIEW_DESCRIPTION)
+        Glide.with(applicationContext).load(intent.getStringExtra(IMG_VIEW))
+            .into(tripImage)
 
         val urlTrip = "https://raw.githubusercontent.com/PaoCuellar/data_test/main/data_trip"
         getRequest(::tripLoad, urlTrip, queue)
 
-        // Get the widgets reference
-        Glide.with(applicationContext).load("https://picsum.photos/1280/720?random=100")
-            .into(imageView)
-
-        LoginButton.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Lo más popular",
-                Toast.LENGTH_LONG
-            ).show()
-            startActivity(Intent(this, GraphicsActivity::class.java))
-        }
-    }
-
-    private fun activityLoad(response: JSONArray) {
-        Log.d("GET REQUEST", "Response: %s".format(response.toString()))
-
-        val activitiesList = ArrayList<Activity>()
-
-        for (i in 0 until response.length()) {
-            activitiesList.add(
-                Activity(
-                    response.getJSONObject(i).get("title") as String,
-                    response.getJSONObject(i).get("description") as String,
-                    response.getJSONObject(i).get("img") as String,
-                    response.getJSONObject(i).get("location") as String,
-                    ::switchActivities
-                )
-            )
-        }
-
-        // Activities load
-        Activities.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-
-        Activities.adapter = ActivitiesAdapter(activitiesList)
     }
 
     private fun tripLoad(response: JSONArray) {
-        Log.d("GET REQUEST", "Response: %s".format(response.toString()))
-
         val tripsList = ArrayList<TripType>()
 
         for (i in 0 until response.length()) {
@@ -94,9 +52,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Trip load
-        Trip.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        Trips.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
 
-        Trip.adapter = TripAdapter(tripsList)
+        Trips.adapter = TripAdapter(tripsList)
     }
 
     private fun messageError(error: VolleyError) {
@@ -133,5 +91,6 @@ class MainActivity : AppCompatActivity() {
         // start your next activity
         startActivity(intent)
     }
+
 
 }

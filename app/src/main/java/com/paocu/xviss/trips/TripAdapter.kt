@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.paocu.xviss.DetailsTripActivity
 import com.paocu.xviss.R
 
 class TripAdapter(private val dataSet: ArrayList<TripType>) :
@@ -36,6 +37,7 @@ class TripAdapter(private val dataSet: ArrayList<TripType>) :
                     "You click on Trip ${data.title}",
                     Toast.LENGTH_LONG
                 ).show()
+                data.clickFunction(data.title, data.image, data.description, "", DetailsTripActivity::class.java)
             }
         }
     }

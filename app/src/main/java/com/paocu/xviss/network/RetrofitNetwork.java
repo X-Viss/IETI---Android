@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * @author Santiago Carrillo
@@ -17,6 +18,7 @@ public class RetrofitNetwork
 {
 
     private Retrofit retrofit;
+
     private String BASE_URL = "http://192.168.20.21:8080";
     //private String BASE_URL = "http://192.168.0.3:8080";
 
@@ -47,7 +49,7 @@ public class RetrofitNetwork
             }
         } );
         retrofit =
-                new Retrofit.Builder().baseUrl( BASE_URL ).addConverterFactory( GsonConverterFactory.create() ).client(
+                new Retrofit.Builder().baseUrl( BASE_URL ).addConverterFactory(ScalarsConverterFactory.create() ).addConverterFactory( GsonConverterFactory.create()).client(
                         httpClient.build() ).build();
     }
 

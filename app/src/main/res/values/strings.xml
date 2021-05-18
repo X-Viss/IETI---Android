@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">XVISS</string>
+    <string name="app_name">Bao Trip</string>
     <string name="title_test"> Bienvenido </string>
     <string name="banner_image">BannerImage</string>
     <string name="login_text">Lo más popular</string>
@@ -25,4 +25,5 @@
     <string name="navigation_questions">Preguntas frecuentes</string>
     <string name="navigation_log_out">Cerrar Sesión</string>
     <string name="TRAVEL_ID">TRAVEL_ID</string>
+    <string name="preference_file_key">preference_file_key</string>
 </resources>

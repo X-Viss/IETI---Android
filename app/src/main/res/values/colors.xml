@@ -9,9 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blueback">#2C355E</color>
     <color name="back">#071659</color>
+    <color name="whitebonito">#F4F4F4</color>
     <color name="transparent">#00000000</color>
     <color name="blue_light">#53c0c6</color>
     <color name="silver">#c0c0c0</color>
     <color name="green_light">#00ffe5</color>
-
+    <color name="bluebuton">#222A4F</color>
 </resources>
