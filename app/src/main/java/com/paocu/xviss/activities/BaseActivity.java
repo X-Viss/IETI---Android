@@ -1,7 +1,9 @@
 package com.paocu.xviss.activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -28,8 +30,10 @@ import com.paocu.xviss.R;
 import com.paocu.xviss.TravelListActivity;
 import com.paocu.xviss.activities.adapter.ListItemsListener;
 import com.paocu.xviss.activities.adapter.TravelItemAdapter;
+import com.paocu.xviss.activities.ui.login.LoginActivity;
 import com.paocu.xviss.model.Travel;
 import com.paocu.xviss.network.RetrofitNetwork;
+import com.paocu.xviss.activities.ui.login.*;
 import com.paocu.xviss.network.requests.TravelService;
 import com.paocu.xviss.services.TravelLiveService;
 
@@ -92,6 +96,8 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
             if(id == R.id.nav_home){
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
+            } else if (id == R.id.nav_log_out){
+                onClickLogout();
             }
             System.out.println(item.getItemId());
             return true;
@@ -127,7 +133,7 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
     public void setUpServices(){
         travelLiveService = new TravelLiveService(getApplicationContext());
         //TODO ADD TOKEN LOGIN
-        RetrofitNetwork retrofitNetwork = new RetrofitNetwork("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZpZC52YXNxdWV6QG1haWwuZXNjdWVsYWluZy5lZHUuY28iLCJleHAiOjE2MjEyMTU4NzIsImlhdCI6MTYyMTE3OTg3Mn0.GTxZBUZSJrTOit67efq1hJpLhVbCoyu_y6HsapiyPqw");
+        RetrofitNetwork retrofitNetwork = new RetrofitNetwork(LoginActivity.getToken());
         travelService = (TravelService) retrofitNetwork.getRetrofitService(TravelService.class);
     }
 
@@ -140,7 +146,7 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
                 List<Travel> widgetContent = new ArrayList<Travel>();
                 try {
                     Response<List<Travel>> response =
-                            travelService.getTravels("david.vasquez@mail.escuelaing.edu.co").execute();
+                            travelService.getTravels(LoginActivity.getEmail()).execute();
 
                     if(response.isSuccessful()){
                         widgetContent.addAll(response.body());
@@ -225,5 +231,15 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
                 }
             }
         });
+    }
+
+    public void onClickLogout(){
+        SharedPreferences sharedPref = getSharedPreferences(getString( R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.remove("TOKEN_KEY");
+        editor.apply();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
