@@ -157,11 +157,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="20dp"
                 android:backgroundTint="#91C2EA"
                 android:onClick="countrySelectionClic"
                 android:text="Guardar"
                 app:layout_constraintTop_toBottomOf="@+id/countryList" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="262dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="30dp"
+                android:text="Selecciona la hora y título de tu viaje!"
+                android:textColor="@color/blue_light"
+                android:textSize="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/guardar_pais"/>
+
+            <EditText
+                android:id="@+id/guardar_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="Título"
+                android:inputType="textPersonName"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="50dp"
+                app:layout_constraintTop_toBottomOf="@+id/guardar_titulo">
+
+                <Button
+                    android:id="@+id/guardar_fecha"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha" />
+
+                <EditText
+                    android:id="@+id/editTextTextPersonName2"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+
         </LinearLayout>
     </ScrollView>
 
