@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/contenedor_principal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -308,8 +310,27 @@
                 android:layout_marginTop="15dp"
                 android:backgroundTint="#91C2EA"
                 android:onClick="weatherSelect"
-                android:text="GUARDAR"
+                android:text="GUARDAR CLIMA"
                 app:layout_constraintTop_toBottomOf="@+id/otono" />
+
+            <Button
+                android:id="@+id/mostrar_categorias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="#91C2EA"
+                android:onClick="genaerateItems"
+                android:text="MOSTRAR ITEMS"
+                app:layout_constraintTop_toBottomOf="@+id/guardar_clima" />
+
+            <LinearLayout
+                android:id="@+id/contenedorItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

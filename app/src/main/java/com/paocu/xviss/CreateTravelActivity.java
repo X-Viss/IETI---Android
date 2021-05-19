@@ -3,15 +3,18 @@ package com.paocu.xviss;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.paocu.xviss.activities.ui.login.LoginActivity;
 import com.paocu.xviss.model.GeneritToUserRolWeatherOrCategory;
@@ -36,21 +39,29 @@ public class CreateTravelActivity extends AppCompatActivity {
     private String[] countries;
     private Spinner spinner;
     private Button fecha;
-    private int dia, mes, año;
+    private int dia, mes, año, itemId=0;
     private EditText titulo, mostrarFecha;
-    private ListCategories listCategories;
+    public LinearLayout linearLayout;
+    public ListCategories listCategories;
     private RetrofitNetwork retrofitNetwork;
     private String idOfCurrentNewTripPage = "";
     private ArrayAdapter<String> countriesListAdapter;
     private CreateTravelServicce createTravelServicce;
     private final ExecutorService executorService = Executors.newFixedThreadPool( 1 );
-    private CheckBox mascota, mochilero, pareja, turista, trabajo, invierno, verano, otoño, primavera;
+    private List<GeneritToUserRolWeatherOrCategory> accesories, onHand, cleanliness, medicine, clothes;
+    private CheckBox mascota, mochilero, pareja, turista, trabajo, invierno, verano, otoño, primavera, generalItemsCheckbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_travel);
 
+        accesories = new ArrayList<>();
+        onHand = new ArrayList<>();
+        cleanliness = new ArrayList<>();
+        medicine = new ArrayList<>();
+        clothes = new ArrayList<>();
+        linearLayout = (LinearLayout) findViewById(R.id.contenedorItems);
         fecha = (Button) findViewById(R.id.guardar_fecha);
         titulo = (EditText) findViewById(R.id.guardar_titulo);
         mostrarFecha = (EditText) findViewById(R.id.mostrar_fecha);
@@ -173,6 +184,10 @@ public class CreateTravelActivity extends AppCompatActivity {
         });
     }
 
+    public void showItems(View view){
+        genaerateItems(view);
+    }
+
     public void buttonFecha(View view){
         final Calendar calendar = Calendar.getInstance();
         dia = calendar.get(Calendar.DAY_OF_MONTH);
@@ -214,4 +229,78 @@ public class CreateTravelActivity extends AppCompatActivity {
         return rolList;
     }
 
+    public void genaerateItems(View view){
+        generateAccesoriesChecks(listCategories.getAccesoriesList(), view);
+        generateClenanestChecks(listCategories.getCleannessList(), view);
+        generateClothesChecks(listCategories.getClothesList(), view);
+        generateMedicineChecks(listCategories.getHealthList(), view);
+        generateOnHandChecks(listCategories.getOnHandList(), view);
+    }
+    private void generateClothesChecks(List<String> clothesList, View view) {
+        for(int i=0; i<clothesList.size(); i++){
+            String data = clothesList.get(i);
+            System.out.println(data);
+            accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
+            generateNewChecbox(data, view);
+        }
+    }
+
+    private void generateMedicineChecks(List<String> medicineList, View view) {
+        for(int i=0; i<medicineList.size(); i++){
+            String data = medicineList.get(i);
+            System.out.println(data);
+            accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
+            generateNewChecbox(data, view);
+        }
+    }
+
+    private void generateClenanestChecks(List<String> cleannessList, View view ) {
+        for(int i=0; i<cleannessList.size(); i++){
+            String data = cleannessList.get(i);
+            System.out.println(data);
+            accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
+            generateNewChecbox(data, view);
+        }
+    }
+
+    private void generateOnHandChecks(List<String> onHandList, View view ) {
+        for(int i=0; i<onHandList.size(); i++){
+            String data = onHandList.get(i);
+            System.out.println(data);
+            accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
+            generateNewChecbox(data, view);
+        }
+    }
+
+    private void generateAccesoriesChecks(List<String> accesoriesList, View view ) {
+        for(int i=0; i<accesoriesList.size(); i++){
+            String data = accesoriesList.get(i);
+            System.out.println(data);
+            accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
+            generateNewChecbox(data, view);
+        }
+    }
+
+    private void generateNewChecbox(String data, View view) {
+        generalItemsCheckbox = new CheckBox(getApplicationContext());
+        generalItemsCheckbox.setId(itemId++);
+        generalItemsCheckbox.setText(data);
+        generalItemsCheckbox.setOnClickListener(getOnClickChecBox(generalItemsCheckbox));
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                linearLayout.addView(generalItemsCheckbox);
+            }
+        });
+    }
+
+    private View.OnClickListener getOnClickChecBox(final Button button) {
+        return new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                System.out.println("on click was the id: "+ button.getId() + "with the opcion: "+ button.getText().toString());
+            }
+        };
+    }
 }
