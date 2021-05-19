@@ -1,9 +1,13 @@
 package com.paocu.xviss;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -18,6 +22,7 @@ import com.paocu.xviss.network.requests.CreateTravelServicce;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,25 +32,26 @@ import retrofit2.Response;
 
 public class CreateTravelActivity extends AppCompatActivity {
 
-    private String idOfCurrentNewTripPage = "";
-    private final ExecutorService executorService = Executors.newFixedThreadPool( 1 );
-    RetrofitNetwork retrofitNetwork;
-    private Spinner spinner;
-    private CheckBox mascota;
-    private CheckBox mochilero;
-    private CheckBox pareja;
-    private CheckBox turista;
-    private CheckBox trabajo;
     private String[] countries;
+    private Spinner spinner;
+    private Button fecha;
+    private int dia, mes, año;
+    private EditText titulo, mostrarFecha;
+    private RetrofitNetwork retrofitNetwork;
+    private String idOfCurrentNewTripPage = "";
     private ArrayAdapter<String> countriesListAdapter;
     private CreateTravelServicce createTravelServicce;
-    private List<GeneritToUserRolWeatherOrCategory> generitToUserRolWeatherOrCategory;
+    private CheckBox mascota, mochilero, pareja, turista, trabajo;
+    private final ExecutorService executorService = Executors.newFixedThreadPool( 1 );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_travel);
 
+        fecha = (Button) findViewById(R.id.guardar_fecha);
+        titulo = (EditText) findViewById(R.id.guardar_titulo);
+        mostrarFecha = (EditText) findViewById(R.id.mostrar_fecha);
         retrofitNetwork =  new RetrofitNetwork(LoginActivity.getToken());
         createTravelServicce = (CreateTravelServicce) retrofitNetwork.getRetrofitService(CreateTravelServicce.class);
         spinner = (Spinner) findViewById(R.id.countryList);
@@ -69,14 +75,9 @@ public class CreateTravelActivity extends AppCompatActivity {
                     List<GeneritToUserRolWeatherOrCategory> rolList = new ArrayList<>();
                     List<GeneritToUserRolWeatherOrCategory> generitToUserRolWeatherOrCategoryList = fillListRol( (ArrayList<GeneritToUserRolWeatherOrCategory>) rolList);
                     Call<String> call = createTravelServicce.postSelectTravelerRol(generitToUserRolWeatherOrCategoryList, idOfCurrentNewTripPage);
-                    System.out.println("Qué paso ome perro ome el call");
-                    System.out.println(call);
                     Response<String> response = call.execute();
-                    System.out.println("Qué paso ome perro ome");
-                    System.out.println(response);
                     if ( response.isSuccessful() ) {
                         idOfCurrentNewTripPage = response.body().toString();
-                        System.out.println("Ome entre a ver que esta pasando y ver si pudo hacer el post");
                         System.out.println(idOfCurrentNewTripPage);
                         String message = "Guardado con éxito!";
                         System.out.println(message);
@@ -92,7 +93,6 @@ public class CreateTravelActivity extends AppCompatActivity {
     }
 
     public void countrySelectionClic(View view){
-
         view.setEnabled( false );
         executorService.execute( new Runnable() {
             @Override
@@ -102,10 +102,6 @@ public class CreateTravelActivity extends AppCompatActivity {
                     Call<Void> call = createTravelServicce.putSelectDestiny(new Country(country), idOfCurrentNewTripPage);
                     Response<Void> response = call.execute();
                     if ( response.isSuccessful() ) {
-                        System.out.println("Ome entre a ver que esta pasando y ver si pudo hacer el put de pais");
-                        System.out.println("");
-                        System.out.println("");
-                        System.out.println("");
                         System.out.println(country);
                         String message = "Guardado con éxito!";
                         System.out.println(message);
@@ -118,6 +114,46 @@ public class CreateTravelActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void dateAndTitleSelect(View view){
+
+        view.setEnabled( false );
+        executorService.execute( new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    String tituloReal = titulo.getText().toString();
+                    String date =  mostrarFecha.getText().toString()+"T18:49:00.000+00:00";
+                    Call<Void> call = createTravelServicce.putTitleAndHour(tituloReal, date, idOfCurrentNewTripPage);
+                    Response<Void> response = call.execute();
+                    if ( response.isSuccessful() ) {
+                        String message = "Guardado con éxito!";
+                        System.out.println(message);
+                    }else{
+                        String message = "No se pudo guardar el el título ni hora, intenta de nuevo!";
+                        System.out.println(message);
+                    }
+                } catch (IOException e ) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void buttonFecha(View view){
+        final Calendar calendar = Calendar.getInstance();
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
+        mes = calendar.get(Calendar.MONTH);
+        año = calendar.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                mostrarFecha.setText(year+"-"+(month+1)+"-"+dayOfMonth);
+            }
+        }, año, mes, dia);
+        datePickerDialog.show();
     }
 
     public List<GeneritToUserRolWeatherOrCategory> fillListRol(List<GeneritToUserRolWeatherOrCategory> rolList){

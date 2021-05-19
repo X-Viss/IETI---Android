@@ -20,4 +20,8 @@ public interface CreateTravelServicce {
 
     @PUT("api/create/destiny")
     Call<Void> putSelectDestiny(@Body Country country, @Query("id") String travleId);
+
+    @PUT("api/create/titlehour")
+    Call<Void> putTitleAndHour(@Query("title") String title, @Query("date") String date, @Query("id") String id);
+
 }
