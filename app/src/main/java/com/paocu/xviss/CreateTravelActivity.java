@@ -1,6 +1,7 @@
 package com.paocu.xviss;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +41,7 @@ public class CreateTravelActivity extends AppCompatActivity {
     private String[] countries;
     private Spinner spinner;
     private Button fecha;
-    private int dia, mes, año, itemId=0;
+    private int dia, mes, año, itemId=0, buttonId=0;
     private EditText titulo, mostrarFecha;
     public LinearLayout linearLayout;
     public ListCategories listCategories;
@@ -237,48 +239,89 @@ public class CreateTravelActivity extends AppCompatActivity {
         generateOnHandChecks(listCategories.getOnHandList(), view);
     }
     private void generateClothesChecks(List<String> clothesList, View view) {
+        generateTitle("Ropa");
         for(int i=0; i<clothesList.size(); i++){
             String data = clothesList.get(i);
             System.out.println(data);
             accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
             generateNewChecbox(data, view);
         }
+        generateButton("GUARDAR ROPA");
     }
 
     private void generateMedicineChecks(List<String> medicineList, View view) {
+        generateTitle("Medicina");
         for(int i=0; i<medicineList.size(); i++){
             String data = medicineList.get(i);
             System.out.println(data);
             accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
             generateNewChecbox(data, view);
         }
+        generateButton("GUARDAR MEDICINA");
     }
 
     private void generateClenanestChecks(List<String> cleannessList, View view ) {
+        generateTitle("Aseo");
         for(int i=0; i<cleannessList.size(); i++){
             String data = cleannessList.get(i);
             System.out.println(data);
             accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
             generateNewChecbox(data, view);
         }
+        generateButton("GUARDAR ASEO");
     }
 
     private void generateOnHandChecks(List<String> onHandList, View view ) {
+        generateTitle("A La Mano");
         for(int i=0; i<onHandList.size(); i++){
             String data = onHandList.get(i);
             System.out.println(data);
             accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
             generateNewChecbox(data, view);
         }
+        generateButton("GUARDAR A LA MANO");
     }
 
     private void generateAccesoriesChecks(List<String> accesoriesList, View view ) {
+        generateTitle("Accesorios");
         for(int i=0; i<accesoriesList.size(); i++){
             String data = accesoriesList.get(i);
             System.out.println(data);
             accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
             generateNewChecbox(data, view);
         }
+        generateButton("GUARDAR ACCESORIOS");
+    }
+
+    private void generateButton(String message){
+        int color = Color.parseColor("#91C2EA");
+        Button button = new Button(getApplicationContext());
+        button.setId(buttonId++);
+        button.setBackgroundColor(color);
+        button.setText(message);
+        button.setOnClickListener(getOnClickButton(button));
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                linearLayout.addView(button);
+            }
+        });
+    }
+
+    private void generateTitle(String title){
+        int color = Color.parseColor("#53c0c6");
+        TextView textView = new TextView(getApplicationContext());
+        textView.setText(title);
+        textView.setTextColor(color);
+        textView.setTextSize(30);
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                linearLayout.addView(textView);
+            }
+        });
     }
 
     private void generateNewChecbox(String data, View view) {
@@ -296,6 +339,16 @@ public class CreateTravelActivity extends AppCompatActivity {
     }
 
     private View.OnClickListener getOnClickChecBox(final Button button) {
+        return new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                System.out.println("on click was the id: "+ button.getId() + "with the opcion: "+ button.getText().toString());
+            }
+        };
+    }
+
+
+    private View.OnClickListener getOnClickButton(final Button button) {
         return new View.OnClickListener(){
             @Override
             public void onClick(View v) {
