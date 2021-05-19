@@ -2,6 +2,7 @@ package com.paocu.xviss.network.requests;
 
 import com.paocu.xviss.model.GeneritToUserRolWeatherOrCategory;
 import com.paocu.xviss.model.util.Country;
+import com.paocu.xviss.model.util.ListCategories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,4 +25,6 @@ public interface CreateTravelServicce {
     @PUT("api/create/titlehour")
     Call<Void> putTitleAndHour(@Query("title") String title, @Query("date") String date, @Query("id") String id);
 
+    @PUT("api/create/weather")
+    Call<ListCategories> putWeatherByUserRolSelected(@Body List<GeneritToUserRolWeatherOrCategory> generitToUserRolWeatherOrCategoryList, @Query ("id") String id);
 }
