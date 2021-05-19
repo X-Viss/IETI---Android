@@ -17,6 +17,7 @@ import com.paocu.xviss.activities.ui.login.LoginActivity;
 import com.paocu.xviss.model.GeneritToUserRolWeatherOrCategory;
 import com.paocu.xviss.model.Travel;
 import com.paocu.xviss.model.util.Country;
+import com.paocu.xviss.model.util.ListCategories;
 import com.paocu.xviss.network.RetrofitNetwork;
 import com.paocu.xviss.network.requests.CreateTravelServicce;
 
@@ -37,12 +38,13 @@ public class CreateTravelActivity extends AppCompatActivity {
     private Button fecha;
     private int dia, mes, año;
     private EditText titulo, mostrarFecha;
+    private ListCategories listCategories;
     private RetrofitNetwork retrofitNetwork;
     private String idOfCurrentNewTripPage = "";
     private ArrayAdapter<String> countriesListAdapter;
     private CreateTravelServicce createTravelServicce;
-    private CheckBox mascota, mochilero, pareja, turista, trabajo;
     private final ExecutorService executorService = Executors.newFixedThreadPool( 1 );
+    private CheckBox mascota, mochilero, pareja, turista, trabajo, invierno, verano, otoño, primavera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +133,37 @@ public class CreateTravelActivity extends AppCompatActivity {
                         String message = "Guardado con éxito!";
                         System.out.println(message);
                     }else{
-                        String message = "No se pudo guardar el el título ni hora, intenta de nuevo!";
+                        String message = "No se pudo guardar el título ni hora, intenta de nuevo!";
+                        System.out.println(message);
+                    }
+                } catch (IOException e ) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void weatherSelect(View view){
+        invierno = (CheckBox) findViewById(R.id.invierno);
+        verano = (CheckBox) findViewById(R.id.verano);
+        primavera = (CheckBox) findViewById(R.id.primavera);
+        otoño = (CheckBox) findViewById(R.id.otono);
+
+        view.setEnabled( false );
+        executorService.execute( new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    List<GeneritToUserRolWeatherOrCategory> weatherList = new ArrayList<>();
+                    List<GeneritToUserRolWeatherOrCategory> generitToUserRolWeatherOrCategoryList = fillListWeather( (ArrayList<GeneritToUserRolWeatherOrCategory>) weatherList);
+                    Call<ListCategories> call = createTravelServicce.putWeatherByUserRolSelected(generitToUserRolWeatherOrCategoryList, idOfCurrentNewTripPage);
+                    Response<ListCategories> response = call.execute();
+                    if ( response.isSuccessful() ) {
+                        listCategories = response.body();
+                        String message = "Guardado con éxito!";
+                        System.out.println(message);
+                    }else{
+                        String message = "No se pudo guardar el clima, intenta de nuevo!";
                         System.out.println(message);
                     }
                 } catch (IOException e ) {
@@ -154,6 +186,18 @@ public class CreateTravelActivity extends AppCompatActivity {
             }
         }, año, mes, dia);
         datePickerDialog.show();
+    }
+
+    public List<GeneritToUserRolWeatherOrCategory> fillListWeather(List<GeneritToUserRolWeatherOrCategory> weatherList){
+        GeneritToUserRolWeatherOrCategory climaInvierno = new GeneritToUserRolWeatherOrCategory(invierno.isChecked(), "Invierno","https://i.ibb.co/ssC1Wz1/KONICA-MINOLTA-DIGITAL-CAMERA.jpg");
+        GeneritToUserRolWeatherOrCategory climaVerano = new GeneritToUserRolWeatherOrCategory(verano.isChecked(),"Verano", "https://i.ibb.co/8BHqHSC/verano.jpg");
+        GeneritToUserRolWeatherOrCategory climaPrimavera = new GeneritToUserRolWeatherOrCategory(primavera.isChecked(), "Primavera", "https://i.ibb.co/rQ6K4Pp/primavera.jpg");
+        GeneritToUserRolWeatherOrCategory climaOtoño = new GeneritToUserRolWeatherOrCategory(otoño.isChecked(), "Otoño", "https://i.ibb.co/XsY2PSt/oto-o.jpg");
+        weatherList.add(climaInvierno);
+        weatherList.add(climaOtoño);
+        weatherList.add(climaPrimavera);
+        weatherList.add(climaVerano);
+        return weatherList;
     }
 
     public List<GeneritToUserRolWeatherOrCategory> fillListRol(List<GeneritToUserRolWeatherOrCategory> rolList){

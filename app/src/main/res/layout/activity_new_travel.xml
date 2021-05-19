@@ -307,6 +307,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:backgroundTint="#91C2EA"
+                android:onClick="weatherSelect"
                 android:text="GUARDAR"
                 app:layout_constraintTop_toBottomOf="@+id/otono" />
         </LinearLayout>
