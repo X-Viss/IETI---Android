@@ -194,16 +194,26 @@
                     android:id="@+id/guardar_fecha"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
+                    android:onClick="buttonFecha"
                     android:text="Fecha" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName2"
+                    android:id="@+id/mostrar_fecha"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName" />
             </LinearLayout>
 
+            <Button
+                android:id="@+id/guardar_fecha_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="#91C2EA"
+                android:onClick="dateAndTitleSelect"
+                android:text="GUARDAR"
+                app:layout_constraintTop_toBottomOf="@+id/mostrar_fecha" />
 
         </LinearLayout>
     </ScrollView>
