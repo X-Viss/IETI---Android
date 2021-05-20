@@ -107,7 +107,7 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
             } else if (id == R.id.nav_log_out){
                 onClickLogout();
             }else if(id == R.id.nav_questions) {
-                Intent intent = new Intent(this, ElementosListActivity.class);
+                Intent intent = new Intent(this, QuestListActivity.class);
                 startActivity(intent);
             }
             System.out.println(item.getItemId());
@@ -137,7 +137,7 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
 
 
     public void openTravelList(MenuItem item){
-        Intent intent = new Intent(this, TravelListActivity.class);
+        Intent intent = new Intent(this, ElementosListActivity.class);
         startActivity(intent);
     }
 
