@@ -24,6 +24,15 @@
     <string name="navigation_list">Mis Viajes</string>
     <string name="navigation_questions">Preguntas frecuentes</string>
     <string name="navigation_log_out">Cerrar Sesión</string>
+    <string name="navigation_edit">Editar Usuario</string>
     <string name="TRAVEL_ID">TRAVEL_ID</string>
     <string name="preference_file_key">preference_file_key</string>
+    <string name="email">email</string>
+    <string name="title_activity_elementos_list">ElementosListActivity</string>
+    <string name="tab_text_1">Accesorios</string>
+    <string name="tab_text_2">Ropa</string>
+    <string name="tab_text_3">Aseo</string>
+    <string name="tab_text_4">Salud</string>
+    <string name="tab_text_5">A la mano</string>
+    <string name="tab_text_6">Varios</string>
 </resources>

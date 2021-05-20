@@ -26,12 +26,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.paocu.xviss.CreateTravelActivity;
+import com.paocu.xviss.ElementosListActivity;
+import com.paocu.xviss.QuestListActivity;
 import com.paocu.xviss.MainActivity;
 import com.paocu.xviss.R;
 import com.paocu.xviss.TravelListActivity;
 import com.paocu.xviss.activities.adapter.ListItemsListener;
 import com.paocu.xviss.activities.adapter.TravelItemAdapter;
 import com.paocu.xviss.activities.ui.login.LoginActivity;
+import com.paocu.xviss.activities.ui.register.EditUser;
 import com.paocu.xviss.model.Travel;
 import com.paocu.xviss.network.RetrofitNetwork;
 import com.paocu.xviss.activities.ui.login.*;
@@ -104,6 +107,12 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
                 startActivity(intent);
             } else if (id == R.id.nav_log_out){
                 onClickLogout();
+            }else if(id == R.id.nav_questions) {
+                Intent intent = new Intent(this, ElementosListActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_editUser){
+                Intent intent = new Intent(this, EditUser.class);
+                startActivity(intent);
             }
             System.out.println(item.getItemId());
             return true;

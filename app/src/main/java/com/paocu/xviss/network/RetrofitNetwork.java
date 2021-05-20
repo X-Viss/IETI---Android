@@ -1,6 +1,7 @@
 package com.paocu.xviss.network;
 
-import com.paocu.xviss.network.requests.CreateTravelServicce;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import okhttp3.Interceptor;
@@ -23,10 +24,15 @@ public class RetrofitNetwork
     //private String BASE_URL = "http://192.168.0.3:8080";
 
 
+
     public RetrofitNetwork()
     {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd")
+                .create();
+
         retrofit = new Retrofit.Builder().baseUrl( BASE_URL ) //localhost for emulator
-                .addConverterFactory( GsonConverterFactory.create() ).build();
+                .addConverterFactory( GsonConverterFactory.create(gson) ).build();
     }
 
 
@@ -48,9 +54,14 @@ public class RetrofitNetwork
                 return chain.proceed( request );
             }
         } );
+
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd")
+                .create();
         retrofit =
-                new Retrofit.Builder().baseUrl( BASE_URL ).addConverterFactory(ScalarsConverterFactory.create() ).addConverterFactory( GsonConverterFactory.create()).client(
+                new Retrofit.Builder().baseUrl( BASE_URL ).addConverterFactory(ScalarsConverterFactory.create() ).addConverterFactory(GsonConverterFactory.create(gson)).client(
                         httpClient.build() ).build();
+
     }
 
     public Object getRetrofitService(Class serviceClass){
