@@ -24,6 +24,8 @@
     <string name="navigation_list">Mis Viajes</string>
     <string name="navigation_questions">Preguntas frecuentes</string>
     <string name="navigation_log_out">Cerrar Sesión</string>
+    <string name="navigation_edit">Editar Usuario</string>
     <string name="TRAVEL_ID">TRAVEL_ID</string>
     <string name="preference_file_key">preference_file_key</string>
+    <string name="email">email</string>
 </resources>

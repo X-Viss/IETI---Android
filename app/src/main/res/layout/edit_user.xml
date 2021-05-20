@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/TextEdit"
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/almondnougat"
+        android:text="Editar usuario"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="407dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextEdit"
+        app:layout_constraintVertical_bias="1.0">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titulo1Email"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="50dp"
+                android:fontFamily="@font/almondnougat"
+                android:text="Correo"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/editEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="50dp"
+                android:fontFamily="@font/almondnougat"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@+id/titulo1edit" />
+
+            <TextView
+                android:id="@+id/titulo2edit"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:fontFamily="@font/almondnougat"
+                android:text="Contraseña"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress2edit" />
+
+            <EditText
+                android:id="@+id/editTextTextPassword2edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="50dp"
+                android:ems="10"
+                android:fontFamily="@font/almondnougat"
+                android:hint="password"
+                android:inputType="textPassword"
+                android:shadowColor="@color/whitebonito"
+                app:layout_constraintTop_toBottomOf="@+id/titulo2edit" />
+
+            <TextView
+                android:id="@+id/titulo3edit"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:fontFamily="@font/almondnougat"
+                android:text="Confirmar Contraseña"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2edit" />
+
+            <EditText
+                android:id="@+id/editTextTextPassword3edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="50dp"
+                android:ems="10"
+                android:fontFamily="@font/almondnougat"
+                android:hint="password"
+                android:inputType="textPassword"
+                android:shadowColor="@color/whitebonito"
+                app:layout_constraintTop_toBottomOf="@+id/titulo3edit" />
+
+            <TextView
+                android:id="@+id/titulo4edit"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:fontFamily="@font/almondnougat"
+                android:text="Pais"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3edit" />
+
+            <Spinner
+                android:id="@+id/spinneredit"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="50dp"
+                android:ems="10"
+                android:fontFamily="@font/almondnougat"
+                app:layout_constraintTop_toBottomOf="@+id/titulo4edit" />
+
+            <TextView
+                android:id="@+id/titulo5edit"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:fontFamily="@font/almondnougat"
+                android:text="Cumpleaños"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@+id/spinneredit" />
+
+            <CalendarView
+                android:id="@+id/calendarViewedit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="50dp"
+                app:layout_constraintTop_toBottomOf="@+id/titulo5edit" />
+
+            <TextView
+                android:id="@+id/titulo6edit"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:fontFamily="@font/almondnougat"
+                android:text="Telefono"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@+id/calendarViewedit" />
+
+            <EditText
+                android:id="@+id/editTextPhoneedit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="50dp"
+                android:ems="10"
+                android:fontFamily="@font/almondnougat"
+                android:hint="Telefono"
+                android:inputType="phone"
+                android:shadowColor="@color/whitebonito"
+                app:layout_constraintTop_toBottomOf="@+id/titulo6edit" />
+
+            <Button
+                android:id="@+id/button6edit"
+                android:layout_width="242dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/almondnougat"
+                android:onClick="onClickChange"
+                android:text="Change"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextPhoneedit" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

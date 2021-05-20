@@ -33,6 +33,7 @@ import com.paocu.xviss.TravelListActivity;
 import com.paocu.xviss.activities.adapter.ListItemsListener;
 import com.paocu.xviss.activities.adapter.TravelItemAdapter;
 import com.paocu.xviss.activities.ui.login.LoginActivity;
+import com.paocu.xviss.activities.ui.register.EditUser;
 import com.paocu.xviss.model.Travel;
 import com.paocu.xviss.network.RetrofitNetwork;
 import com.paocu.xviss.activities.ui.login.*;
@@ -107,6 +108,9 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
                 onClickLogout();
             }else if(id == R.id.nav_questions) {
                 Intent intent = new Intent(this, QuestListActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_editUser){
+                Intent intent = new Intent(this, EditUser.class);
                 startActivity(intent);
             }
             System.out.println(item.getItemId());

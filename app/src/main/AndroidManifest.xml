@@ -41,6 +41,7 @@
         <activity android:name=".TravelListActivity"></activity>
         <activity android:name=".activities.ui.login.LoginActivity"></activity>
         <activity android:name=".activities.ui.register.RegisterActivity"></activity>
+        <activity android:name=".activities.ui.register.EditUser"></activity>
         <activity android:name=".QuestListActivity" />
         <activity
             android:name=".activities.BaseActivity"
