@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
@@ -29,6 +30,7 @@ import com.paocu.xviss.R;
 import com.paocu.xviss.activities.ui.register.model.AutenticationResponse;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,6 +46,8 @@ public class EditUser extends AppCompatActivity {
     private Spinner country;
     private Spinner editSpinner;
     private String[] countries;
+    private Date birthday;
+    private UserModel user;
     private final ExecutorService executorService = Executors.newFixedThreadPool( 1 );
 
     @Override
@@ -64,10 +68,28 @@ public class EditUser extends AppCompatActivity {
         phone = (EditText) findViewById(R.id.editTextPhoneedit);
         birth = (CalendarView) findViewById(R.id.calendarViewedit);
 
-    }
-    public void onClickChange(View view){
+        birth = (CalendarView) findViewById(R.id.calendarView);
+        birth.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth)  {
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.YEAR, year);
+                cal.set(Calendar.MONTH, month);
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                birthday = cal.getTime();
+                System.out.println("------------------------------------------------");
+                System.out.println(birthday);
+            }
+        });
+
 
     }
+
+    public void onClickChange(View view){
+        user.setBirth(birthday);
+    }
+
     public void onChangeClickedVerify(RegisterService registerService){
         Context aca = this;
         executorService.execute( new Runnable(){
@@ -79,7 +101,7 @@ public class EditUser extends AppCompatActivity {
                         @Override
                         public void run() {
                             if (response.isSuccessful()) {
-                                UserModel user = response.body();
+                                user = response.body();
                                 editTextEmail.setHint(user.getEmail());
                                 password.setHint(user.getPassword());
                                 for (int i=0; i< countries.length; i++){

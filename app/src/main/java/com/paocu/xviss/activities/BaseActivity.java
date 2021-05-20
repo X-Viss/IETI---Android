@@ -262,6 +262,6 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
 
     private void setUsername(){
         TextView user = (TextView) findViewById(R.id.username);
-        user.setText(LoginActivity.getEmail());
+        //user.setHint(LoginActivity.getEmail());
     }
 }
