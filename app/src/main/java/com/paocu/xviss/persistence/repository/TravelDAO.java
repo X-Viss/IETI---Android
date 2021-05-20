@@ -12,6 +12,7 @@ import java.util.List;
 
 @Dao
 public interface TravelDAO {
+
     @Query("SELECT * FROM travel")
     List<Travel> getAll();
 
@@ -23,4 +24,5 @@ public interface TravelDAO {
 
     @Delete
     void delete(Travel task);
+
 }

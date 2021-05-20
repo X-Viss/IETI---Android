@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -122,6 +123,7 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
         recyclerView = findViewById(R.id.travelistrecyclerView);
         setUpServices();
         loadTravels();
+        setUsername();
 
     }
 
@@ -256,5 +258,10 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void setUsername(){
+        TextView user = (TextView) findViewById(R.id.username);
+        user.setText(LoginActivity.getEmail());
     }
 }
