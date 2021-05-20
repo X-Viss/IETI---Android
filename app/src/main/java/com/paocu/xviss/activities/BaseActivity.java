@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.paocu.xviss.CreateTravelActivity;
+import com.paocu.xviss.ElementosListActivity;
 import com.paocu.xviss.QuestListActivity;
 import com.paocu.xviss.MainActivity;
 import com.paocu.xviss.R;
@@ -106,7 +107,7 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
             } else if (id == R.id.nav_log_out){
                 onClickLogout();
             }else if(id == R.id.nav_questions) {
-                Intent intent = new Intent(this, QuestListActivity.class);
+                Intent intent = new Intent(this, ElementosListActivity.class);
                 startActivity(intent);
             }
             System.out.println(item.getItemId());

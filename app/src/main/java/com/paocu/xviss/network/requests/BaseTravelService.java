@@ -1,5 +1,7 @@
 package com.paocu.xviss.network.requests;
 
+import com.paocu.xviss.model.Travel;
+import com.paocu.xviss.model.TravelOnLoad;
 import com.paocu.xviss.model.util.Question;
 import com.paocu.xviss.model.util.Store;
 
@@ -15,4 +17,7 @@ public interface BaseTravelService {
 
     @GET("bag/stores")
     public Call<List<Store>> getStores(@Query("category") String category);
+
+    @GET("bag/travel")
+    public Call<TravelOnLoad> getTravel(@Query("travelId") String travelId);
 }
