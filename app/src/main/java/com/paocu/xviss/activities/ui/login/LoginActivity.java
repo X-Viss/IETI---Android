@@ -17,6 +17,7 @@ import com.paocu.xviss.R;
 import com.paocu.xviss.activities.ui.login.model.*;
 import com.paocu.xviss.network.*;
 import com.paocu.xviss.activities.*;
+import com.paocu.xviss.activities.ui.register.*;
 import com.paocu.xviss.activities.ui.login.service.AuthService;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -101,4 +102,8 @@ public class LoginActivity extends AppCompatActivity {
         return Email;
     }
 
+    public void onClickLoginARegistro(View view) {
+        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivity(intent);
+    }
 }

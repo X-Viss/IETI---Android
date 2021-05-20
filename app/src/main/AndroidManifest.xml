@@ -36,9 +36,11 @@
         <activity
             android:name=".CreateTravelActivity"
             android:parentActivityName=".activities.BaseActivity" />
-        <activity android:name=".DetailsTypeActivity" />
-        <activity android:name=".DetailsTripActivity" />
-        <activity android:name=".TravelListActivity" />
+        <activity android:name=".DetailsTypeActivity"></activity>
+        <activity android:name=".DetailsTripActivity"></activity>
+        <activity android:name=".TravelListActivity"></activity>
+        <activity android:name=".activities.ui.login.LoginActivity"></activity>
+        <activity android:name=".activities.ui.register.RegisterActivity"></activity>
         <activity android:name=".QuestListActivity" />
         <activity android:name=".ComprasCategoriaActivity"></activity>
         <activity android:name=".activities.ui.login.LoginActivity" />
