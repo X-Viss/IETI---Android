@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.paocu.xviss.activities.ui.login.LoginActivity;
 import com.paocu.xviss.model.GeneritToUserRolWeatherOrCategory;
 import com.paocu.xviss.model.Travel;
@@ -82,7 +83,6 @@ public class CreateTravelActivity extends AppCompatActivity {
         turista = (CheckBox) findViewById(R.id.turista);
         trabajo = (CheckBox) findViewById(R.id.trabajo);
 
-        view.setEnabled( false );
         executorService.execute( new Runnable() {
             @Override
             public void run() {
@@ -95,9 +95,13 @@ public class CreateTravelActivity extends AppCompatActivity {
                         idOfCurrentNewTripPage = response.body().toString();
                         System.out.println(idOfCurrentNewTripPage);
                         String message = "Guardado con éxito!";
+                        Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                         System.out.println(message);
                     }else{
                         String message = "No se pudo crear el rol, intenta de nuevo!";
+                        Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                         System.out.println(message);
                     }
                 } catch (IOException e ) {
@@ -108,7 +112,7 @@ public class CreateTravelActivity extends AppCompatActivity {
     }
 
     public void countrySelectionClic(View view){
-        view.setEnabled( false );
+
         executorService.execute( new Runnable() {
             @Override
             public void run() {
@@ -119,9 +123,13 @@ public class CreateTravelActivity extends AppCompatActivity {
                     if ( response.isSuccessful() ) {
                         System.out.println(country);
                         String message = "Guardado con éxito!";
+                        Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                         System.out.println(message);
                     }else{
                         String message = "No se pudo guardar el país, intenta de nuevo!";
+                        Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                         System.out.println(message);
                     }
                 } catch (IOException e ) {
@@ -133,7 +141,6 @@ public class CreateTravelActivity extends AppCompatActivity {
 
     public void dateAndTitleSelect(View view){
 
-        view.setEnabled( false );
         executorService.execute( new Runnable() {
             @Override
             public void run() {
@@ -144,9 +151,13 @@ public class CreateTravelActivity extends AppCompatActivity {
                     Response<Void> response = call.execute();
                     if ( response.isSuccessful() ) {
                         String message = "Guardado con éxito!";
+                        Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                         System.out.println(message);
                     }else{
                         String message = "No se pudo guardar el título ni hora, intenta de nuevo!";
+                        Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                         System.out.println(message);
                     }
                 } catch (IOException e ) {
@@ -162,7 +173,6 @@ public class CreateTravelActivity extends AppCompatActivity {
         primavera = (CheckBox) findViewById(R.id.primavera);
         otoño = (CheckBox) findViewById(R.id.otono);
 
-        view.setEnabled( false );
         executorService.execute( new Runnable() {
             @Override
             public void run() {
@@ -174,9 +184,13 @@ public class CreateTravelActivity extends AppCompatActivity {
                     if ( response.isSuccessful() ) {
                         listCategories = response.body();
                         String message = "Guardado con éxito!";
+                        Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                         System.out.println(message);
                     }else{
                         String message = "No se pudo guardar el clima, intenta de nuevo!";
+                        Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                         System.out.println(message);
                     }
                 } catch (IOException e ) {
@@ -242,8 +256,7 @@ public class CreateTravelActivity extends AppCompatActivity {
         generateTitle("Ropa");
         for(int i=0; i<clothesList.size(); i++){
             String data = clothesList.get(i);
-            System.out.println(data);
-            accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
+            clothes.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
             generateNewChecbox(data, view);
         }
         generateButton("GUARDAR ROPA");
@@ -253,8 +266,7 @@ public class CreateTravelActivity extends AppCompatActivity {
         generateTitle("Medicina");
         for(int i=0; i<medicineList.size(); i++){
             String data = medicineList.get(i);
-            System.out.println(data);
-            accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
+            medicine.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
             generateNewChecbox(data, view);
         }
         generateButton("GUARDAR MEDICINA");
@@ -264,8 +276,7 @@ public class CreateTravelActivity extends AppCompatActivity {
         generateTitle("Aseo");
         for(int i=0; i<cleannessList.size(); i++){
             String data = cleannessList.get(i);
-            System.out.println(data);
-            accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
+            cleanliness.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
             generateNewChecbox(data, view);
         }
         generateButton("GUARDAR ASEO");
@@ -275,8 +286,7 @@ public class CreateTravelActivity extends AppCompatActivity {
         generateTitle("A La Mano");
         for(int i=0; i<onHandList.size(); i++){
             String data = onHandList.get(i);
-            System.out.println(data);
-            accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
+            onHand.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
             generateNewChecbox(data, view);
         }
         generateButton("GUARDAR A LA MANO");
@@ -286,7 +296,6 @@ public class CreateTravelActivity extends AppCompatActivity {
         generateTitle("Accesorios");
         for(int i=0; i<accesoriesList.size(); i++){
             String data = accesoriesList.get(i);
-            System.out.println(data);
             accesories.add(new GeneritToUserRolWeatherOrCategory(false, data, "https://i.ibb.co/XLqTpvs/fondo.jp"));
             generateNewChecbox(data, view);
         }
@@ -342,6 +351,7 @@ public class CreateTravelActivity extends AppCompatActivity {
         return new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                checkItemSelected(button.getText().toString());
                 System.out.println("on click was the id: "+ button.getId() + "with the opcion: "+ button.getText().toString());
             }
         };
@@ -352,8 +362,152 @@ public class CreateTravelActivity extends AppCompatActivity {
         return new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                buttonItemSelected(button.getId(), button.getText().toString(), v);
                 System.out.println("on click was the id: "+ button.getId() + "with the opcion: "+ button.getText().toString());
             }
         };
+    }
+
+    private void checkItemSelected(String nameItem){
+        boolean flag = false;
+        flag = searchItem(accesories, flag, nameItem);
+        if(!flag){
+            flag = searchItem(onHand,flag, nameItem);
+        }if(!flag) {
+            flag = searchItem(medicine, flag, nameItem);
+        }if(!flag) {
+            flag = searchItem(clothes, flag, nameItem);
+        }if(!flag) {
+            flag = searchItem(cleanliness, flag, nameItem);
+        }
+    }
+
+    private boolean searchItem(List<GeneritToUserRolWeatherOrCategory> items, boolean flag, String nameItem){
+        for(GeneritToUserRolWeatherOrCategory item: items){
+            if(item.getName().equals(nameItem)){
+                item.setCheck(!item.isCheck());
+                flag=true;
+            }
+        }
+        return flag;
+    }
+
+    private void buttonItemSelected(int buttonId, String buttonName, View view) {
+        if(buttonId==0){
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Call<Void> call = createTravelServicce.putAccessoriesByUserRolSelected(accesories, idOfCurrentNewTripPage);
+                        Response<Void> response = call.execute();
+                        if ( response.isSuccessful() ) {
+                            String message = "Guardado con éxito!";
+                            Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            System.out.println(message);
+                        }else{
+                            String message = "No se pudo guardar el clima, intenta de nuevo!";
+                            Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            System.out.println(message);
+                        }
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            });
+        }else if(buttonId==1){
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Call<Void> call = createTravelServicce.putCleanlinessByUserRolSelected(cleanliness, idOfCurrentNewTripPage);
+                        Response<Void> response = call.execute();
+                        if (response.isSuccessful()) {
+                            String message = "Guardado con éxito!";
+                            Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            System.out.println(message);
+                        } else {
+                            String message = "No se pudo guardar el clima, intenta de nuevo!";
+                            Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            System.out.println(message);
+                        }
+                    }catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            });
+        }else if(buttonId==2){
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Call<Void> call = createTravelServicce.putClothesByUserRolSelected(clothes, idOfCurrentNewTripPage);
+                        Response<Void> response = call.execute();
+                        if (response.isSuccessful()) {
+                            String message = "Guardado con éxito!";
+                            Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            System.out.println(message);
+                        } else {
+                            String message = "No se pudo guardar el clima, intenta de nuevo!";
+                            Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            System.out.println(message);
+                        }
+                    }catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            });
+        }else if(buttonId==3){
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Call<Void> call = createTravelServicce.putMedicineByUserRolSelected(medicine, idOfCurrentNewTripPage);
+                        Response<Void> response = call.execute();
+                        if (response.isSuccessful()) {
+                            String message = "Guardado con éxito!";
+                            Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            System.out.println(message);
+                        } else {
+                            String message = "No se pudo guardar el clima, intenta de nuevo!";
+                            Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            System.out.println(message);
+                        }
+                    }catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            });
+        }else if(buttonId==4){
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Call<Void> call = createTravelServicce.putOnHandByUserRolSelected(onHand, idOfCurrentNewTripPage);
+                        Response<Void> response = call.execute();
+                        if (response.isSuccessful()) {
+                            String message = "Guardado con éxito!";
+                            Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            System.out.println(message);
+                        } else {
+                            String message = "No se pudo guardar el clima, intenta de nuevo!";
+                            Snackbar.make(view,  message, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            System.out.println(message);
+                        }
+                    }catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            });
+        }
     }
 }
