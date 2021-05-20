@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.paocu.xviss.CreateTravelActivity;
+import com.paocu.xviss.QuestListActivity;
 import com.paocu.xviss.MainActivity;
 import com.paocu.xviss.R;
 import com.paocu.xviss.TravelListActivity;
@@ -72,10 +73,12 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
+        Intent intentCreateActivity = new Intent(this, CreateTravelActivity.class);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO REDIRECT TO CREATE TRAVEL VIEW
+                startActivity(intentCreateActivity);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -102,6 +105,9 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
                 startActivity(intent);
             } else if (id == R.id.nav_log_out){
                 onClickLogout();
+            }else if(id == R.id.nav_questions) {
+                Intent intent = new Intent(this, QuestListActivity.class);
+                startActivity(intent);
             }
             System.out.println(item.getItemId());
             return true;

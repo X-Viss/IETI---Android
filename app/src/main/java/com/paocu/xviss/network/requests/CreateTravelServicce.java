@@ -27,4 +27,19 @@ public interface CreateTravelServicce {
 
     @PUT("api/create/weather")
     Call<ListCategories> putWeatherByUserRolSelected(@Body List<GeneritToUserRolWeatherOrCategory> generitToUserRolWeatherOrCategoryList, @Query ("id") String id);
+
+    @PUT("api/create/category/accessories")
+    Call<Void> putAccessoriesByUserRolSelected(@Body List<GeneritToUserRolWeatherOrCategory> accessories, @Query ("id") String id);
+
+    @PUT("api/create/category/onhand")
+    Call<Void> putOnHandByUserRolSelected(@Body List<GeneritToUserRolWeatherOrCategory> onhand, @Query ("id") String id);
+
+    @PUT("api/create/category/cleanliness")
+    Call<Void> putCleanlinessByUserRolSelected(@Body List<GeneritToUserRolWeatherOrCategory> cleanliness, @Query ("id") String id);
+
+    @PUT("api/create/category/medicine")
+    Call<Void> putMedicineByUserRolSelected(@Body List<GeneritToUserRolWeatherOrCategory> medicine, @Query ("id") String id);
+
+    @PUT("api/create/category/clothes")
+    Call<Void> putClothesByUserRolSelected(@Body List<GeneritToUserRolWeatherOrCategory> clothes, @Query ("id") String id);
 }
