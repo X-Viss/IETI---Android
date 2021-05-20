@@ -72,10 +72,12 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
+        Intent intentCreateActivity = new Intent(this, CreateTravelActivity.class);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO REDIRECT TO CREATE TRAVEL VIEW
+                startActivity(intentCreateActivity);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
