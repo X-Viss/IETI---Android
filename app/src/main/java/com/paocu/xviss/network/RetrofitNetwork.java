@@ -20,7 +20,7 @@ public class RetrofitNetwork
 
     private Retrofit retrofit;
 
-    private String BASE_URL = "http://192.168.20.21:8080";
+    private String BASE_URL = "http://192.168.0.14:8080";
     //private String BASE_URL = "http://192.168.0.3:8080";
 
 

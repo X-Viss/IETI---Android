@@ -35,4 +35,6 @@
     <string name="tab_text_4">Salud</string>
     <string name="tab_text_5">A la mano</string>
     <string name="tab_text_6">Varios</string>
+    <string name="edit_message">Agrega un elemento</string>
+    <string name="button_send">Guardar</string>
 </resources>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -108,7 +109,7 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
             } else if (id == R.id.nav_log_out){
                 onClickLogout();
             }else if(id == R.id.nav_questions) {
-                Intent intent = new Intent(this, ElementosListActivity.class);
+                Intent intent = new Intent(this, QuestListActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_editUser){
                 Intent intent = new Intent(this, EditUser.class);
@@ -122,6 +123,7 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
         recyclerView = findViewById(R.id.travelistrecyclerView);
         setUpServices();
         loadTravels();
+        setUsername();
 
     }
 
@@ -141,7 +143,7 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
 
 
     public void openTravelList(MenuItem item){
-        Intent intent = new Intent(this, TravelListActivity.class);
+        Intent intent = new Intent(this, ElementosListActivity.class);
         startActivity(intent);
     }
 
@@ -256,5 +258,10 @@ public class BaseActivity extends AppCompatActivity implements ListItemsListener
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void setUsername(){
+        TextView user = (TextView) findViewById(R.id.username);
+        //user.setHint(LoginActivity.getEmail());
     }
 }

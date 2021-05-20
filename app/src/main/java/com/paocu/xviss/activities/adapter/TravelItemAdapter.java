@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.paocu.xviss.ElementosListActivity;
 import com.paocu.xviss.MainActivity;
 import com.paocu.xviss.R;
 import com.paocu.xviss.model.Travel;
@@ -89,7 +90,7 @@ public class TravelItemAdapter extends RecyclerView.Adapter<TravelItemAdapter.Vi
                 public void onClick(View v) {
                     System.out.println("EDIT" + travel);
                     //TODO ADD EDIT TRAVEL INTENT
-                    Intent editIntent = new Intent(context, MainActivity.class);
+                    Intent editIntent = new Intent(context, ElementosListActivity.class);
                     editIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     System.out.println(travel.getTravelId());
                     editIntent.putExtra("TRAVEL_ID", travel.getTravelId());
