@@ -36,4 +36,13 @@ public class GeneritToUserRolWeatherOrCategory {
     public void setPath(String path) {
         this.path = path;
     }
+
+    @Override
+    public String toString() {
+        return "GeneritToUserRolWeatherOrCategory{" +
+                "check=" + check +
+                ", name='" + name + '\'' +
+                ", path='" + path + '\'' +
+                '}';
+    }
 }
