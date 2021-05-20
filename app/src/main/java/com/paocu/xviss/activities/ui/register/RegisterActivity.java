@@ -116,6 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void run(){
                 try{
+                    Response<AutenticationResponse> prueba = registerService.subcribeClient(authenticationRequest).execute();
                     Response<AutenticationResponse> response = registerService.subcribeClient(authenticationRequest).execute();
                     runOnUiThread(new Runnable() {
                         @Override

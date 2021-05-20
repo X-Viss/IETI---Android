@@ -40,14 +40,14 @@
         <activity
             android:name=".CreateTravelActivity"
             android:parentActivityName=".activities.BaseActivity" />
-        <activity android:name=".DetailsTypeActivity" />
-        <activity android:name=".DetailsTripActivity" />
-        <activity android:name=".TravelListActivity" />
-        <activity android:name=".activities.ui.login.LoginActivity" />
-        <activity android:name=".activities.ui.register.RegisterActivity" />
+        <activity android:name=".DetailsTypeActivity"/>
+        <activity android:name=".DetailsTripActivity"/>
+        <activity android:name=".TravelListActivity"/>
+        <activity android:name=".activities.ui.login.LoginActivity"/>
+        <activity android:name=".activities.ui.register.RegisterActivity"/>
+        <activity android:name=".activities.ui.register.EditUser"/>
         <activity android:name=".QuestListActivity" />
         <activity android:name=".ComprasCategoriaActivity" />
-        <activity android:name=".activities.ui.login.LoginActivity" />
         <activity
             android:name=".activities.BaseActivity"
             android:label="@string/app_name"
